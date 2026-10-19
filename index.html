@@ -1,312 +1,682 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Isograd</title>
+  <title>Isograd – L'expertise tech au service de l'évaluation</title>
+  <meta name="description" content="Isograd, c'est 15 ans d'expertise technologique au service de l'évaluation. Deux offres complémentaires : Tosa (certification) et Isograd Testing Services (plateforme d'évaluation).">
   <meta name="robots" content="noindex, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="icon" href="https://static.tosa.org/tosaorg_1/images/favicon.png">
-  <link rel="stylesheet" href="https://static.tosa.org/tosaorg_1/js/node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --tosa-orange: #f14910;
-      --its-green: #00CC99;
+      --ink: #1a1a1a;
+      --text: #333333;
+      --muted: #555555;
+      --teal: #005c5c;
+      --teal-dark: #0b4f4f;
+      --teal-dots: #0e6e6e;
+      --its: #00cc99;
+      --tosa: #f14910;
+      --grey: #ededed;
+      --grey-soft: #f4f4f4;
+      --white: #ffffff;
+      --cut: 14px;
+      --container: 1200px;
+      --gutter: clamp(20px, 5vw, 64px);
     }
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      font-size: 18px;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Arial, sans-serif;
-      background-color: #FFF;
-      color: #444;
-    }
-
-    article {
-      padding: 50px 0px;
-      min-width: 1024px;
-      position: relative;
-    }
-
-    article h1, h2, h3, h4 {
-      color: inherit;
-      text-align: center;
-      font-family: 'Epilogue', Open Sans;
-    }
-
-    a {
-      cursor: pointer;
-      color: #666;
-      text-decoration: none;
-    }
-
-    a:hover {
-      filter: brightness(85%);
-    }
-
-    .btn {
-      border: medium none;
-      border-radius: 10px;
-      color: #fff;
-      padding: 10px 30px;
-      outline: none;
-      font-size: 16px;
-      line-height: inherit;
-    }
-
-    /* ── Règles CSS appliquées à #redirectionarticle uniquement ── */
-
-    #redirectionarticle .full-screen-bg {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: -1;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      padding: 0;
       margin: 0;
+      font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
     }
 
-    #redirectionarticle {
-      padding: inherit;
-      min-width: inherit;
-      position: inherit;
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, h4, p, ul { margin: 0; }
+    ul { padding: 0; list-style: none; }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    /* ─── Décorations communes ─── */
+    .dots {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--teal-dots);
+    }
+
+    .title {
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+    }
+    h1.title { font-size: clamp(34px, 4.1vw, 56px); }
+    h2.title { font-size: clamp(26px, 2.35vw, 34px); }
+
+    .cut {
+      clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+    }
+
+    /* ─── Boutons ─── */
+    .btn {
+      --cut: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 15px 22px 15px 20px;
+      background: var(--ink);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1.2;
+      clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+      transition: filter .2s ease, transform .2s ease;
+    }
+    .btn::after {
+      content: '+';
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 1;
+    }
+    .btn:hover { filter: brightness(1.15); }
+    .btn-its { background: var(--its); }
+    .btn-tosa { background: var(--tosa); }
+    .btn-its:hover, .btn-tosa:hover { filter: brightness(0.92); }
+
+    /* ─── Header ─── */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--white);
+      border-bottom: 1px solid #eee;
+    }
+    .header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      height: 76px;
+    }
+    .logo img { height: 34px; width: auto; }
+    .nav {
+      display: flex;
+      gap: clamp(24px, 4vw, 56px);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .nav a { position: relative; padding: 6px 0; }
+    .nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 100%; bottom: 0;
+      height: 2px;
+      background: var(--teal);
+      transition: right .25s ease;
+    }
+    .nav a:hover::after { right: 0; }
+    .header-cta { display: flex; gap: 12px; }
+    .header-cta .btn {
+      --cut: 10px;
+      padding: 12px 16px;
+      font-size: 12px;
+      min-width: 110px;
+      text-align: left;
+    }
+    .header-cta .btn-its { min-width: 150px; }
+
+    /* ─── Hero ─── */
+    .hero {
+      position: relative;
+      min-height: clamp(520px, 56vw, 760px);
+      display: flex;
+      align-items: center;
+      background: url('assets/hero.jpg') center / cover no-repeat;
+      color: var(--ink);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,.35) 0%, rgba(255,255,255,0) 60%);
+      pointer-events: none;
+    }
+    .hero .container { position: relative; padding-top: 60px; padding-bottom: 60px; }
+    .hero-content { max-width: 680px; }
+    .hero p {
+      margin: 22px 0 56px;
+      font-size: 15px;
+      color: var(--ink);
+      max-width: 420px;
+    }
+
+    /* ─── À propos ─── */
+    .about { display: grid; grid-template-columns: 1fr 1fr; }
+    .about-text {
+      display: flex;
+      align-items: center;
+      padding: clamp(60px, 8vw, 120px) var(--gutter);
+    }
+    .about-text > div {
+      max-width: 520px;
+      margin-left: auto;
+      width: 100%;
+    }
+    .about-text h2 { margin-bottom: 28px; }
+    .about-text p { font-size: 14px; line-height: 1.75; }
+    .about-text p + p { margin-top: 18px; }
+    .about-text .lead, .about-text .strong { font-weight: 700; color: var(--ink); }
+    .about-text .btn { margin-top: 44px; }
+
+    .about-visual {
+      background: var(--teal);
       display: flex;
       justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      overflow: hidden;
+      min-height: 640px;
+    }
+    .quote {
+      position: relative;
+      height: 100%;
+      width: auto;
+      max-width: 100%;
+      aspect-ratio: 960 / 1130;
+      container-type: inline-size;
+      background: url('assets/temoignage.png') center / contain no-repeat;
+    }
+    .quote blockquote {
+      position: absolute;
+      left: 27.5%;
+      top: 24%;
+      width: 46%;
+      margin: 0;
+      color: var(--white);
+      font-style: italic;
+      font-weight: 600;
+      font-size: 4cqw;
+      line-height: 1.22;
     }
 
-    #redirectionarticle .container {
-      min-width: inherit;
-      max-width: 1700px;
-      margin: 0px 20px;
+    /* ─── Offres ─── */
+    .offers {
+      padding: clamp(60px, 8vw, 110px) 0;
+      overflow: hidden;
     }
-
-    #redirectionarticle .container h1 img {
-      width: 24px;
-      height: 24px;
-      margin-bottom: 1px;
+    .offers .container {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: clamp(32px, 5vw, 72px);
+      align-items: start;
     }
-
-    #redirectionarticle .container p {
-      margin: 0px 20px;
+    .offers-visual {
+      position: relative;
+      padding: 60px 0 0 0;
     }
-
-    #redirectionarticle .container .tosa {
-      background-color: var(--tosa-orange);
-      color: white;
+    .offers-shape {
+      position: absolute;
+      top: 0;
+      left: -40%;
+      width: 125%;
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
     }
-
-    #redirectionarticle .container .its {
-      background-color: var(--its-green);
-      color: white;
+    .offers-dots {
+      position: absolute;
+      left: 0;
+      top: 50px;
+      z-index: 2;
+      display: flex;
+      gap: 9px;
     }
+    .offers-dots span { width: 3px; height: 3px; background: #bbb; border-radius: 50%; }
+    .offers-photo {
+      --cut: 42px;
+      position: relative;
+      z-index: 1;
+      width: 82%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: 50% 30%;
+      margin-top: 24px;
+    }
+    .offers-text h2 { margin-bottom: 18px; font-size: clamp(24px, 2.2vw, 32px); }
+    .offers-text > p { font-size: 13px; color: var(--muted); max-width: 540px; }
 
-    #redirectionarticle .container a {
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 44px;
+    }
+    .card {
+      --cut: 22px;
+      position: relative;
+      background: var(--white);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .09);
+      padding: 28px 22px 26px;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-head {
+      position: relative;
+      padding-left: 14px;
+      margin-bottom: 34px;
+    }
+    .card-head::before {
+      content: '';
+      position: absolute;
+      left: -22px;
+      top: -6px;
+      bottom: -6px;
+      width: 3px;
+      background: var(--accent);
+    }
+    .card-head img { height: 30px; width: auto; }
+    .card-head .tag {
       display: block;
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .card-desc {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+    .card-sub {
+      font-size: 11px;
+      font-style: italic;
+      color: #777;
+      margin-top: 6px;
+    }
+    .card ul {
+      margin: 28px 0 32px;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .card li {
+      position: relative;
+      padding-left: 12px;
+      margin-bottom: 7px;
+    }
+    .card li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .card .btn { margin-top: auto; align-self: flex-start; }
+    .card-tosa { --accent: var(--tosa); }
+    .card-its { --accent: var(--its); }
+
+    /* ─── FAQ ─── */
+    .faq { padding: clamp(40px, 6vw, 80px) 0 clamp(80px, 10vw, 140px); }
+    .faq h2 { margin-bottom: 8px; }
+    .faq .sub { font-size: 13px; color: var(--muted); margin-bottom: 44px; }
+    .faq-list { max-width: 940px; display: flex; flex-direction: column; gap: 10px; }
+    .faq-item {
+      border-left: 3px solid var(--teal);
+    }
+    .faq-item summary {
+      --cut: 18px;
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 20px 14px 30px;
+      background: var(--grey-soft);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+';
+      flex: none;
+      width: 20px;
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1;
       text-align: center;
-      font-size: large;
-      border-radius: 10px;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
+      margin-right: 32px;
+      transition: transform .2s ease;
+    }
+    .faq-item[open] summary::after { content: '−'; }
+    .faq-item summary:hover { background: #ececec; }
+    .faq-item .answer {
+      padding: 16px 30px 18px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text);
     }
 
-    #redirectionarticle .container .btn-container {
-      margin: 20px;
-      max-width: 30vw;
+    /* ─── Footer ─── */
+    .footer {
+      position: relative;
+      background: var(--ink);
+      color: rgba(255,255,255,.8);
+      font-size: 12px;
+      overflow: hidden;
+    }
+    .footer-main {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 40px;
+      padding: 56px var(--gutter) 48px;
+      max-width: var(--container);
+      margin: 0 auto;
+    }
+    .footer-brand {
+      --cut: 40px;
+      position: relative;
+      padding: 36px 40px 40px;
+      margin-left: calc(-1 * var(--gutter));
+      background: #232323;
+      clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+      max-width: 420px;
+    }
+    .footer-brand img { height: 30px; width: auto; margin-bottom: 26px; }
+    .footer-brand p { line-height: 1.7; max-width: 240px; color: rgba(255,255,255,.75); }
+    .footer-links { padding-top: 10px; }
+    .footer-links .dots span { background: var(--its); }
+    .footer-links h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 22px;
+    }
+    .footer-group { margin-bottom: 20px; }
+    .footer-group > a {
+      display: inline-block;
+      font-size: 11px;
+      color: rgba(255,255,255,.85);
+      margin-bottom: 10px;
+    }
+    .footer-group > a:hover { color: var(--white); text-decoration: underline; }
+    .socials { display: flex; gap: 10px; }
+    .socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 5px;
+      background: #2b2b2b;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 13px;
+      transition: background .2s ease;
+    }
+    .socials a:hover { background: var(--teal); }
+    .socials svg { width: 16px; height: 16px; fill: currentColor; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.12);
+      padding: 18px var(--gutter);
+      text-align: center;
+      font-size: 11px;
+      color: rgba(255,255,255,.7);
     }
 
-    #redirectionarticle .container .row,
-    #redirectionarticle .container .col {
-      margin: 0px 0px 6px 0px;
+    /* ─── Responsive ─── */
+    @media (max-width: 1024px) {
+      .about-visual { min-height: 520px; }
     }
 
-    @media screen and (max-width: 768px) {
-      #redirectionarticle .container {
-        padding: inherit;
-      }
-      #redirectionarticle .container h1 {
-        font-size: large;
-        line-height: inherit;
-      }
-      #redirectionarticle .container a {
-        font-size: large;
-        padding: 2px;
-      }
-      #redirectionarticle .container p {
-        font-size: small;
-      }
-      #redirectionarticle .container .btn-container {
-        margin: 14px;
-        max-width: inherit;
-      }
-      #redirectionarticle .container a img {
-        max-width: 60vw;
-      }
+    @media (max-width: 900px) {
+      .nav { display: none; }
+      .about { grid-template-columns: 1fr; }
+      .about-text > div { margin-left: 0; max-width: 640px; }
+      .about-visual { min-height: 0; padding: 24px 0; }
+      .quote { height: auto; width: 100%; max-width: 520px; }
+      .offers .container { grid-template-columns: 1fr; }
+      .offers-visual { padding-top: 40px; max-width: 520px; }
+      .offers-shape { left: -20%; width: 110%; }
     }
 
-    @media screen and (min-width: 768px) and (max-width: 1700px) {
-      #redirectionarticle .container h1 {
-        font-size: x-large;
-        margin: 0px;
-      }
-      #redirectionarticle .container .row,
-      #redirectionarticle .container .col {
-        margin: 0px 0px 6px 0px;
-      }
-      #redirectionarticle .container .btn-container {
-        margin: 14px;
-      }
-      #redirectionarticle .container a {
-        font-size: medium;
-        padding: 2px;
-      }
-      #redirectionarticle .container p {
-        font-size: 12px;
-      }
-      #redirectionarticle .container a img {
-        max-width: 26vw;
-      }
-    }
-
-    @media screen and (min-width: 1700px) {
-      #redirectionarticle .container h1 {
-        font-size: xx-large;
-      }
-      #redirectionarticle .container a img {
-        max-width: 26vw;
-      }
-      #redirectionarticle .container a {
-        font-size: x-large;
-        border-radius: 14px;
-        -webkit-border-radius: 14px;
-        -moz-border-radius: 14px;
-        padding: 4px;
-      }
-      #redirectionarticle .container p {
-        font-size: large;
-      }
+    @media (max-width: 640px) {
+      .footer-main { grid-template-columns: 1fr; gap: 32px; padding-top: 40px; }
+      .footer-brand { margin-left: 0; max-width: none; padding: 28px 24px 32px; }
+      .header .container { height: 66px; }
+      .logo img { height: 28px; }
+      .header-cta .btn { min-width: 0; padding: 10px 12px; font-size: 11px; gap: 10px; }
+      .header-cta .btn-its { min-width: 0; }
+      .hero { min-height: 520px; align-items: flex-end; }
+      .hero::before { background: linear-gradient(180deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.75) 100%); }
+      .hero p { margin-bottom: 36px; }
+      .cards { grid-template-columns: 1fr; }
+      .faq-item summary::after { margin-right: 8px; }
+      .faq-item summary { padding-left: 20px; }
+      .faq-item .answer { padding-left: 20px; padding-right: 20px; }
     }
   </style>
 </head>
-<body data-lan_id="1" lang="fr" id="redirectionpage">
+<body>
 
-  <!-- ── FRANÇAIS ── -->
-  <main role="main" class="main" id="main-fr">
-    <article id="redirectionarticle" class="long_text">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <h1 class="text-center mt-4">
-              Avec des clients dans plus de 58 pays et doté de la plateforme la plus avancée du marché, le groupe
-              <img src="https://static.tosa.org/tosaorg_1/images/redirection/avatar_isograd.png" class="img-fluid">
-              <b>Isograd propose 2 marques distinctes avec 2 sites web dédiés :</b>
-            </h1>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 col-md">
-            <a href="https://www.isograd-testingservices.com/FR/index" target="_blank">
-              <img src="https://static.tosa.org/tosaorg_1/images/redirection/fr_laptop_its.png" class="img-fluid">
-            </a>
-            <div class="d-grid gap-2 mx-auto col-10 btn-container">
-              <a type="button" class="btn btn-primary its" href="https://www.isograd-testingservices.com/FR/index" target="_blank">
-                <b>Solution de création d'examens et de tests en ligne<br>Isograd Testing Services</b>
-              </a>
-            </div>
-            <p><b>Isograd Testing Services</b>, solution de création de tests et d'examens en ligne incluant :</p>
-            <ul><li>Une solutiong de création et d'hébergements de tests et d'examens en ligne</li>
-            <li> Une solution de surveillance à distance</li>
-            <li>Un module de correction automatisée de copies</li>
-            <li>Un catalogue de plus de 300 tests prêts à l'emploi</li></ul>
-          </div>
-          <div class="col-sm-12 col-md">
-            <a href="https://www.tosa.org/FR/index" target="_blank">
-              <img src="https://static.tosa.org/tosaorg_1/images/redirection/fr_laptop_tosa.png" class="img-fluid">
-            </a>
-            <div class="d-grid gap-2 mx-auto col-10 btn-container">
-              <a type="button" class="btn btn-primary tosa" href="https://www.tosa.org/FR/index" target="_blank">
-                <b>Certifications <br>Tosa</b>
-              </a>
-            </div>
-            <p><b>Tosa, offre de certifications permettant à des millions de personnes à travers le monde de démontrer leurs compétences numériques grâce à un score sur 1000 apposé sur leur CV.</b></p>
-          </div>
-        </div>
-        <div class="full-screen-bg" style="background-image: url(https://static.tosa.org/tosaorg_1/images/redirection/isograd_background.png)"></div>
+  <!-- ─── Header ─── -->
+  <header class="header">
+    <div class="container">
+      <a class="logo" href="#top" aria-label="Isograd – accueil">
+        <img src="assets/logo-isograd.png" alt="Isograd">
+      </a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="#a-propos">À propos</a>
+        <a href="#offres">Nos offres</a>
+        <a href="#faq">FAQ</a>
+        <a href="mailto:contact@isograd.com">Contact</a>
+      </nav>
+      <div class="header-cta">
+        <a class="btn btn-its" href="https://www.isograd-testingservices.com/FR/index" target="_blank" rel="noopener">Isograd Testing Services</a>
+        <a class="btn btn-tosa" href="https://www.tosa.org/FR/index" target="_blank" rel="noopener">Tosa</a>
       </div>
-    </article>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ─── Hero ─── -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <h1 class="title">Isograd, c'est l'expertise tech au service de l'évaluation.</h1>
+          <p>15 ans pour transformer l'évaluation en outil de décision, un avantage compétitif.</p>
+          <a class="btn" href="#offres">Découvrir nos offres</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── À propos ─── -->
+    <section class="about" id="a-propos">
+      <div class="about-text">
+        <div>
+          <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <h2 class="title">À propos</h2>
+          <p class="lead">Isograd, c'est 15 ans d'expertise technologique au service de l'évaluation.</p>
+          <p>Implantés en France, aux États-Unis et au Canada, nous concevons des solutions qui permettent aux organisations d'évaluer les compétences de manière objective, fiable et sécurisée.<br>
+          Nos technologies s'adaptent à tous les besoins et tous les contextes d'évaluation.</p>
+          <p class="strong">Deux expertises complémentaires portent aujourd'hui notre vision : Tosa et Isograd Testing Services (ITS).</p>
+          <a class="btn" href="mailto:contact@isograd.com">Nous contacter</a>
+        </div>
+      </div>
+      <div class="about-visual">
+        <figure class="quote" role="group" aria-label="Témoignage de Marc Alpérovitch, Président et Fondateur Isograd">
+          <blockquote>“Le premier emploi est obtenu sur la base du diplôme, les suivants s'appuieront sur les compétences”.</blockquote>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ─── Offres ─── -->
+    <section class="offers" id="offres">
+      <div class="container">
+        <div class="offers-visual">
+          <img class="offers-shape" src="assets/forme.png" alt="" aria-hidden="true">
+          <div class="offers-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <img class="offers-photo cut" src="assets/offres.jpg" alt="Une candidate passe un test sur son ordinateur portable">
+        </div>
+        <div class="offers-text">
+          <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <h2 class="title">Nos deux offres : Certifier. Évaluer.</h2>
+          <p>Isograd, c'est deux solutions complémentaires et un seul objectif : mesurer ce qui compte vraiment.</p>
+
+          <div class="cards">
+            <article class="card card-tosa cut">
+              <div class="card-head">
+                <img src="assets/logo-tosa.png" alt="Tosa">
+                <span class="tag">Certification officielle</span>
+              </div>
+              <p class="card-desc">La certification reconnue à l'international des compétences numériques.</p>
+              <p class="card-sub">Finançable CPF</p>
+              <ul>
+                <li>Score sur 1 000 points – 5 niveaux (Initial → Expert)</li>
+                <li>Systèmes anti-triche et intégration LMS</li>
+                <li>Examens adaptatifs – résultats immédiats</li>
+                <li>+1 800 centres agréés dans 58 pays</li>
+                <li>Reconnu à l'international</li>
+              </ul>
+              <a class="btn btn-tosa" href="https://www.tosa.org/FR/index" target="_blank" rel="noopener">Accéder au site</a>
+            </article>
+
+            <article class="card card-its cut">
+              <div class="card-head">
+                <img src="assets/logo-its.png" alt="Isograd Testing Services">
+                <span class="tag">Plateforme d'évaluation</span>
+              </div>
+              <p class="card-desc">La plateforme française la plus complète pour piloter vos tests et examens en toute autonomie.</p>
+              <p class="card-sub">sans certification obligatoire</p>
+              <ul>
+                <li>Création de tests sur mesure avec ou sans IA</li>
+                <li>Intégration avec votre ATS, LMS, SIRH</li>
+                <li>Surveillance à distance</li>
+                <li>Rapports clairs et exploitables</li>
+                <li>Conformité RGPD &amp; Accès 24/7</li>
+              </ul>
+              <a class="btn btn-its" href="https://www.isograd-testingservices.com/FR/index" target="_blank" rel="noopener">Accéder au site</a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── FAQ ─── -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        <h2 class="title">FAQ</h2>
+        <p class="sub">Questions fréquentes</p>
+
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>Qu'est-ce qu'Isograd ?</summary>
+            <div class="answer">
+              Isograd est une entreprise EdTech française fondée en 2010 à Paris.<br>
+              Entre Paris, les États-Unis et le Canada, nos talents œuvrent chaque jour pour concevoir des solutions innovantes en évaluation et en certification des compétences numériques.
+            </div>
+          </details>
+
+          <details class="faq-item" open>
+            <summary>Quelle est la différence entre Tosa et ITS ?</summary>
+            <div class="answer">
+              Tosa s'adresse aux individus et aux organismes de formation qui souhaitent valoriser les compétences avec un certificat reconnu sur le marché du travail. Isograd Testing Services s'adresse aux organisations qui veulent piloter leurs propres évaluations et examens en interne, à leur rythme et selon leurs règles, sans certification obligatoire à la clé. En résumé : Tosa certifie pour le marché, ITS évalue pour l'organisation.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Quels logiciels sont couverts par la certification Tosa ?</summary>
+            <div class="answer">
+              Tosa couvre les principaux logiciels et compétences numériques utilisés en entreprise : la bureautique (Excel, Word, PowerPoint, Outlook, Google Sheets, Docs et Slides), les outils de création (Photoshop, Illustrator, InDesign, AutoCAD, WordPress), les compétences digitales et la cybersécurité, ainsi que des langages de programmation. Retrouvez le catalogue complet sur <a href="https://www.tosa.org/FR/index" target="_blank" rel="noopener" style="text-decoration: underline;">tosa.org</a>.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Isograd Testing Services est-il compatible avec les outils RH ?</summary>
+            <div class="answer">
+              Oui. Isograd Testing Services s'intègre à votre écosystème RH : ATS, LMS et SIRH, via API ou connecteurs dédiés. Les invitations, les résultats et les rapports circulent ainsi automatiquement entre vos outils, sans ressaisie, et dans le respect du RGPD.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- ── ENGLISH ── -->
-  <main role="main" class="main" id="main-en" style="display:none">
-    <article id="redirectionarticle" class="long_text">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <h1 class="text-center mt-4">
-              <b>Isograd</b> is a global skills testing company with a footprint in 58 countries. The Isograd Group is comprised of two distinct brands:
-            </h1>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 col-md">
-            <a href="https://www.isograd-testingservices.com/EN/index" target="_blank">
-              <img src="https://static.tosa.org/tosaorg_1/images/redirection/en_laptop_its.png" class="img-fluid">
-            </a>
-            <div class="d-grid gap-2 mx-auto col-10 btn-container">
-              <a type="button" class="btn btn-primary its" href="https://www.isograd-testingservices.com/EN/index" target="_blank">
-                <b>Isograd Testing Services<br>Online exams and assesment tests solution</b>
-              </a>
-            </div>
-            <p><b>Isograd Testing Services</b>, an online test and exam creation solution including:</p>
-<ul><li>A solution for creating and hosting online tests and exams</li>
-<li>A remote proctoring solution</li>
-<li>An automated grading module for written exams</li>
-<li>A catalog of over 300 ready-to-use tests</li></ul>
-          </div>
-          <div class="col-sm-12 col-md">
-            <a href="https://www.tosa.org/EN/index" target="_blank">
-              <img src="https://static.tosa.org/tosaorg_1/images/redirection/en_laptop_tosa.png" class="img-fluid">
-            </a>
-            <div class="d-grid gap-2 mx-auto col-10 btn-container">
-              <a type="button" class="btn btn-primary tosa" href="https://www.tosa.org/EN/index" target="_blank">
-                <b>Tosa Certifications<br>for Digital Skills</b>
-              </a>
-            </div>
-            <p><b>Tosa is a globally recognized certification solution for digital skills, empowering hundreds of thousands of individuals worldwide to showcase their digital competencies.</b></p>
-          </div>
-        </div>
-        <div class="full-screen-bg" style="background-image: url(https://static.tosa.org/tosaorg_1/images/redirection/isograd_background.png)"></div>
+  <!-- ─── Footer ─── -->
+  <footer class="footer" id="contact">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img src="assets/logo-isograd-white.png" alt="Isograd">
+        <p>L'expertise tech au service de l'évaluation de compétences depuis plus de 15 ans.</p>
       </div>
-    </article>
-  </main>
+      <div class="footer-links">
+        <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        <h3>Accès rapides</h3>
+
+        <div class="footer-group">
+          <a href="https://www.tosa.org/FR/index" target="_blank" rel="noopener">www.tosa.org</a>
+          <div class="socials">
+            <a href="https://www.linkedin.com/company/tosa-certifications/" target="_blank" rel="noopener" aria-label="Tosa sur LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/channel/UCvB0YX9gQqxEJ6JtRXRJZMQ/videos" target="_blank" rel="noopener" aria-label="Tosa sur YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+            </a>
+            <a href="https://webikeo.fr/chaine/isograd/webinars" target="_blank" rel="noopener" aria-label="Webinars Tosa sur Webikeo">W</a>
+          </div>
+        </div>
+
+        <div class="footer-group">
+          <a href="https://www.isograd-testingservices.com/FR/index" target="_blank" rel="noopener">www.isograd-testingservices.com</a>
+          <div class="socials">
+            <a href="https://www.linkedin.com/company/isograd-testing-services" target="_blank" rel="noopener" aria-label="Isograd Testing Services sur LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@GroupeIsograd" target="_blank" rel="noopener" aria-label="Isograd Testing Services sur YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+            </a>
+            <a href="https://webikeo.fr/chaine/isograd/webinars#channel-nav" target="_blank" rel="noopener" aria-label="Webinars Isograd Testing Services sur Webikeo">W</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © <span id="year"></span> Isograd SAS. Tous droits réservés. | 35 rue des Jeûneurs, 75002 Paris.
+    </div>
+  </footer>
 
   <script>
-    (function () {
-      var stored = sessionStorage.getItem('iso-lang');
-      var lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-      var active = stored || (lang.startsWith('fr') ? 'fr' : 'en');
-
-      if (active === 'en') {
-        document.getElementById('main-fr').style.display = 'none';
-        document.getElementById('main-en').style.display = '';
-        document.documentElement.lang = 'en';
-        document.body.setAttribute('lang', 'en');
-        document.body.setAttribute('data-lan_id', '2');
-      }
-
-      if (!stored) sessionStorage.setItem('iso-lang', active);
-    })();
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
