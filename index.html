@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Isograd – L'expertise tech au service de l'évaluation</title>
-  <meta name="description" content="Isograd, c'est 15 ans d'expertise technologique au service de l'évaluation. Deux offres complémentaires : Tosa (certification) et Isograd Testing Services (plateforme d'évaluation).">
+  <title data-i18n="meta.title">Isograd – L'expertise tech au service de l'évaluation</title>
+  <meta name="description" data-i18n-content="meta.description" content="Isograd, c'est 15 ans d'expertise technologique au service de l'évaluation. Deux offres complémentaires : Tosa (certification) et Isograd Testing Services (plateforme d'évaluation).">
   <meta name="robots" content="noindex, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="icon" href="https://static.tosa.org/tosaorg_1/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +18,7 @@
       --teal: #005c5c;
       --teal-dark: #0b4f4f;
       --teal-dots: #0e6e6e;
+      --teal-light: #8fd3c8;
       --its: #00cc99;
       --tosa: #f14910;
       --grey: #ededed;
@@ -44,7 +45,7 @@
 
     img { max-width: 100%; display: block; }
     a { color: inherit; text-decoration: none; }
-    h1, h2, h3, h4, p, ul { margin: 0; }
+    h1, h2, h3, h4, p, ul, figure { margin: 0; }
     ul { padding: 0; list-style: none; }
 
     .container {
@@ -140,6 +141,7 @@
       transition: right .25s ease;
     }
     .nav a:hover::after { right: 0; }
+    .header-right { display: flex; align-items: center; gap: 18px; }
     .header-cta { display: flex; gap: 12px; }
     .header-cta .btn {
       --cut: 10px;
@@ -149,6 +151,31 @@
       text-align: left;
     }
     .header-cta .btn-its { min-width: 150px; }
+
+    /* ─── Sélecteur de langue ─── */
+    .lang {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #888;
+    }
+    .lang button {
+      appearance: none;
+      border: 0;
+      background: none;
+      font: inherit;
+      color: inherit;
+      padding: 4px 5px;
+      cursor: pointer;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+    }
+    .lang button:hover { color: var(--ink); }
+    .lang button[aria-pressed="true"] { color: var(--ink); background: var(--grey-soft); }
+    .lang .sep { color: #ccc; }
 
     /* ─── Hero ─── */
     .hero {
@@ -212,14 +239,52 @@
     .quote blockquote {
       position: absolute;
       left: 27.5%;
-      top: 24%;
-      width: 46%;
+      top: 22%;
+      width: 47%;
       margin: 0;
       color: var(--white);
       font-style: italic;
       font-weight: 600;
-      font-size: 4cqw;
+      font-size: 3.6cqw;
       line-height: 1.22;
+    }
+    .quote figcaption {
+      position: absolute;
+      left: 28.1%;
+      top: 47.3%;
+      display: flex;
+      align-items: center;
+      gap: 1.3cqw;
+      color: var(--white);
+    }
+    .quote .avatar {
+      width: 7.5cqw;
+      height: 7.5cqw;
+      border-radius: 50%;
+      border: 0.3cqw solid var(--white);
+      flex: none;
+      background: var(--teal-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 2.4cqw;
+      color: var(--white);
+      overflow: hidden;
+    }
+    .quote .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .quote .author-name {
+      display: block;
+      font-weight: 600;
+      font-size: 2.35cqw;
+      line-height: 1.15;
+      color: var(--teal-light);
+    }
+    .quote .author-role {
+      display: block;
+      font-size: 1.35cqw;
+      line-height: 1.4;
+      margin-top: 0.3cqw;
     }
 
     /* ─── Offres ─── */
@@ -316,6 +381,7 @@
       color: #777;
       margin-top: 6px;
     }
+    .card-sub:empty { display: none; }
     .card ul {
       margin: 28px 0 32px;
       font-size: 11px;
@@ -381,6 +447,7 @@
       line-height: 1.6;
       color: var(--text);
     }
+    .faq-item .answer a { text-decoration: underline; }
 
     /* ─── Footer ─── */
     .footer {
@@ -445,10 +512,18 @@
     .footer-bottom {
       border-top: 1px solid rgba(255,255,255,.12);
       padding: 18px var(--gutter);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
       text-align: center;
       font-size: 11px;
       color: rgba(255,255,255,.7);
     }
+    .footer-bottom .lang { color: rgba(255,255,255,.5); }
+    .footer-bottom .lang button:hover,
+    .footer-bottom .lang button[aria-pressed="true"] { color: var(--white); background: rgba(255,255,255,.1); }
 
     /* ─── Responsive ─── */
     @media (max-width: 1024px) {
@@ -469,7 +544,9 @@
     @media (max-width: 640px) {
       .footer-main { grid-template-columns: 1fr; gap: 32px; padding-top: 40px; }
       .footer-brand { margin-left: 0; max-width: none; padding: 28px 24px 32px; }
-      .header .container { height: 66px; }
+      .header .container { height: 66px; gap: 12px; }
+      .header-right { gap: 8px; }
+      .header-right .lang { display: none; }
       .logo img { height: 28px; }
       .header-cta .btn { min-width: 0; padding: 10px 12px; font-size: 11px; gap: 10px; }
       .header-cta .btn-its { min-width: 0; }
@@ -488,18 +565,25 @@
   <!-- ─── Header ─── -->
   <header class="header">
     <div class="container">
-      <a class="logo" href="#top" aria-label="Isograd – accueil">
+      <a class="logo" href="#top" aria-label="Isograd">
         <img src="assets/logo-isograd.png" alt="Isograd">
       </a>
       <nav class="nav" aria-label="Navigation principale">
-        <a href="#a-propos">À propos</a>
-        <a href="#offres">Nos offres</a>
-        <a href="#faq">FAQ</a>
-        <a href="mailto:contact@isograd.com">Contact</a>
+        <a href="#a-propos" data-i18n="nav.about">À propos</a>
+        <a href="#offres" data-i18n="nav.offers">Nos offres</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        <a href="mailto:contact@isograd.com" data-i18n="nav.contact">Contact</a>
       </nav>
-      <div class="header-cta">
-        <a class="btn btn-its" href="https://www.isograd-testingservices.com/FR/index" target="_blank" rel="noopener">Isograd Testing Services</a>
-        <a class="btn btn-tosa" href="https://www.tosa.org/FR/index" target="_blank" rel="noopener">Tosa</a>
+      <div class="header-right">
+        <div class="lang" role="group" aria-label="Langue / Language">
+          <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+          <span class="sep" aria-hidden="true">|</span>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <div class="header-cta">
+          <a class="btn btn-its" href="https://www.isograd-testingservices.com/FR/index" data-href-en="https://www.isograd-testingservices.com/EN/index" target="_blank" rel="noopener">Isograd Testing Services</a>
+          <a class="btn btn-tosa" href="https://www.tosa.org/FR/index" data-href-en="https://www.tosa.org/EN/index" target="_blank" rel="noopener">Tosa</a>
+        </div>
       </div>
     </div>
   </header>
@@ -511,9 +595,9 @@
       <div class="container">
         <div class="hero-content">
           <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
-          <h1 class="title">Isograd, c'est l'expertise tech au service de l'évaluation.</h1>
-          <p>15 ans pour transformer l'évaluation en outil de décision, un avantage compétitif.</p>
-          <a class="btn" href="#offres">Découvrir nos offres</a>
+          <h1 class="title" data-i18n="hero.title">Isograd, c'est l'expertise tech au service de l'évaluation.</h1>
+          <p data-i18n="hero.sub">15 ans pour transformer l'évaluation en outil de décision, un avantage compétitif.</p>
+          <a class="btn" href="#offres" data-i18n="hero.btn">Découvrir nos offres</a>
         </div>
       </div>
     </section>
@@ -523,17 +607,24 @@
       <div class="about-text">
         <div>
           <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
-          <h2 class="title">À propos</h2>
-          <p class="lead">Isograd, c'est 15 ans d'expertise technologique au service de l'évaluation.</p>
-          <p>Implantés en France, aux États-Unis et au Canada, nous concevons des solutions qui permettent aux organisations d'évaluer les compétences de manière objective, fiable et sécurisée.<br>
+          <h2 class="title" data-i18n="about.title">À propos</h2>
+          <p class="lead" data-i18n="about.lead">Isograd, c'est 15 ans d'expertise technologique au service de l'évaluation.</p>
+          <p data-i18n-html="about.body">Implantés en France, aux États-Unis et au Canada, nous concevons des solutions qui permettent aux organisations d'évaluer les compétences de manière objective, fiable et sécurisée.<br>
           Nos technologies s'adaptent à tous les besoins et tous les contextes d'évaluation.</p>
-          <p class="strong">Deux expertises complémentaires portent aujourd'hui notre vision : Tosa et Isograd Testing Services (ITS).</p>
-          <a class="btn" href="mailto:contact@isograd.com">Nous contacter</a>
+          <p class="strong" data-i18n="about.strong">Deux expertises complémentaires portent aujourd'hui notre vision : Tosa et Isograd Testing Services (ITS).</p>
+          <a class="btn" href="mailto:contact@isograd.com" data-i18n="about.btn">Nous contacter</a>
         </div>
       </div>
       <div class="about-visual">
-        <figure class="quote" role="group" aria-label="Témoignage de Marc Alpérovitch, Président et Fondateur Isograd">
-          <blockquote>“Le premier emploi est obtenu sur la base du diplôme, les suivants s'appuieront sur les compétences”.</blockquote>
+        <figure class="quote">
+          <blockquote data-i18n="quote.text">“Le premier emploi est obtenu sur la base du diplôme, les suivants s'appuieront sur les compétences”.</blockquote>
+          <figcaption>
+            <span class="avatar" id="quote-avatar"><img src="assets/avatar-marc.png" alt=""></span>
+            <span>
+              <span class="author-name" data-i18n="quote.name">Marc Alpérovitch</span>
+              <span class="author-role" data-i18n="quote.role">Président et Fondateur Isograd</span>
+            </span>
+          </figcaption>
         </figure>
       </div>
     </section>
@@ -544,46 +635,46 @@
         <div class="offers-visual">
           <img class="offers-shape" src="assets/forme.png" alt="" aria-hidden="true">
           <div class="offers-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-          <img class="offers-photo cut" src="assets/offres.jpg" alt="Une candidate passe un test sur son ordinateur portable">
+          <img class="offers-photo cut" src="assets/offres.jpg" alt="Une candidate passe un test sur son ordinateur portable" data-i18n-alt="offers.photoAlt">
         </div>
         <div class="offers-text">
           <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
-          <h2 class="title">Nos deux offres : Certifier. Évaluer.</h2>
-          <p>Isograd, c'est deux solutions complémentaires et un seul objectif : mesurer ce qui compte vraiment.</p>
+          <h2 class="title" data-i18n="offers.title">Nos deux offres : Certifier. Évaluer.</h2>
+          <p data-i18n="offers.sub">Isograd, c'est deux solutions complémentaires et un seul objectif : mesurer ce qui compte vraiment.</p>
 
           <div class="cards">
             <article class="card card-tosa cut">
               <div class="card-head">
                 <img src="assets/logo-tosa.png" alt="Tosa">
-                <span class="tag">Certification officielle</span>
+                <span class="tag" data-i18n="tosa.tag">Certification officielle</span>
               </div>
-              <p class="card-desc">La certification reconnue à l'international des compétences numériques.</p>
-              <p class="card-sub">Finançable CPF</p>
+              <p class="card-desc" data-i18n="tosa.desc">La certification reconnue à l'international des compétences numériques.</p>
+              <p class="card-sub" data-i18n="tosa.sub">Finançable CPF</p>
               <ul>
-                <li>Score sur 1 000 points – 5 niveaux (Initial → Expert)</li>
-                <li>Systèmes anti-triche et intégration LMS</li>
-                <li>Examens adaptatifs – résultats immédiats</li>
-                <li>+1 800 centres agréés dans 58 pays</li>
-                <li>Reconnu à l'international</li>
+                <li data-i18n="tosa.li1">Score sur 1 000 points – 5 niveaux (Initial → Expert)</li>
+                <li data-i18n="tosa.li2">Systèmes anti-triche et intégration LMS</li>
+                <li data-i18n="tosa.li3">Examens adaptatifs – résultats immédiats</li>
+                <li data-i18n="tosa.li4">+1 800 centres agréés dans 58 pays</li>
+                <li data-i18n="tosa.li5">Reconnu à l'international</li>
               </ul>
-              <a class="btn btn-tosa" href="https://www.tosa.org/FR/index" target="_blank" rel="noopener">Accéder au site</a>
+              <a class="btn btn-tosa" href="https://www.tosa.org/FR/index" data-href-en="https://www.tosa.org/EN/index" target="_blank" rel="noopener" data-i18n="card.btn">Accéder au site</a>
             </article>
 
             <article class="card card-its cut">
               <div class="card-head">
                 <img src="assets/logo-its.png" alt="Isograd Testing Services">
-                <span class="tag">Plateforme d'évaluation</span>
+                <span class="tag" data-i18n="its.tag">Plateforme d'évaluation</span>
               </div>
-              <p class="card-desc">La plateforme française la plus complète pour piloter vos tests et examens en toute autonomie.</p>
-              <p class="card-sub">sans certification obligatoire</p>
+              <p class="card-desc" data-i18n="its.desc">La plateforme française la plus complète pour piloter vos tests et examens en toute autonomie.</p>
+              <p class="card-sub" data-i18n="its.sub">sans certification obligatoire</p>
               <ul>
-                <li>Création de tests sur mesure avec ou sans IA</li>
-                <li>Intégration avec votre ATS, LMS, SIRH</li>
-                <li>Surveillance à distance</li>
-                <li>Rapports clairs et exploitables</li>
-                <li>Conformité RGPD &amp; Accès 24/7</li>
+                <li data-i18n="its.li1">Création de tests sur mesure avec ou sans IA</li>
+                <li data-i18n="its.li2">Intégration avec votre ATS, LMS, SIRH</li>
+                <li data-i18n="its.li3">Surveillance à distance</li>
+                <li data-i18n="its.li4">Rapports clairs et exploitables</li>
+                <li data-i18n="its.li5">Conformité RGPD &amp; Accès 24/7</li>
               </ul>
-              <a class="btn btn-its" href="https://www.isograd-testingservices.com/FR/index" target="_blank" rel="noopener">Accéder au site</a>
+              <a class="btn btn-its" href="https://www.isograd-testingservices.com/FR/index" data-href-en="https://www.isograd-testingservices.com/EN/index" target="_blank" rel="noopener" data-i18n="card.btn">Accéder au site</a>
             </article>
           </div>
         </div>
@@ -594,35 +685,35 @@
     <section class="faq" id="faq">
       <div class="container">
         <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
-        <h2 class="title">FAQ</h2>
-        <p class="sub">Questions fréquentes</p>
+        <h2 class="title" data-i18n="faq.title">FAQ</h2>
+        <p class="sub" data-i18n="faq.sub">Questions fréquentes</p>
 
         <div class="faq-list">
           <details class="faq-item" open>
-            <summary>Qu'est-ce qu'Isograd ?</summary>
-            <div class="answer">
+            <summary data-i18n="faq.q1">Qu'est-ce qu'Isograd ?</summary>
+            <div class="answer" data-i18n-html="faq.a1">
               Isograd est une entreprise EdTech française fondée en 2010 à Paris.<br>
               Entre Paris, les États-Unis et le Canada, nos talents œuvrent chaque jour pour concevoir des solutions innovantes en évaluation et en certification des compétences numériques.
             </div>
           </details>
 
           <details class="faq-item" open>
-            <summary>Quelle est la différence entre Tosa et ITS ?</summary>
-            <div class="answer">
+            <summary data-i18n="faq.q2">Quelle est la différence entre Tosa et ITS ?</summary>
+            <div class="answer" data-i18n="faq.a2">
               Tosa s'adresse aux individus et aux organismes de formation qui souhaitent valoriser les compétences avec un certificat reconnu sur le marché du travail. Isograd Testing Services s'adresse aux organisations qui veulent piloter leurs propres évaluations et examens en interne, à leur rythme et selon leurs règles, sans certification obligatoire à la clé. En résumé : Tosa certifie pour le marché, ITS évalue pour l'organisation.
             </div>
           </details>
 
           <details class="faq-item">
-            <summary>Quels logiciels sont couverts par la certification Tosa ?</summary>
-            <div class="answer">
-              Tosa couvre les principaux logiciels et compétences numériques utilisés en entreprise : la bureautique (Excel, Word, PowerPoint, Outlook, Google Sheets, Docs et Slides), les outils de création (Photoshop, Illustrator, InDesign, AutoCAD, WordPress), les compétences digitales et la cybersécurité, ainsi que des langages de programmation. Retrouvez le catalogue complet sur <a href="https://www.tosa.org/FR/index" target="_blank" rel="noopener" style="text-decoration: underline;">tosa.org</a>.
+            <summary data-i18n="faq.q3">Quels logiciels sont couverts par la certification Tosa ?</summary>
+            <div class="answer" data-i18n-html="faq.a3">
+              Tosa couvre les principaux logiciels et compétences numériques utilisés en entreprise : la bureautique (Excel, Word, PowerPoint, Outlook, Google Sheets, Docs et Slides), les outils de création (Photoshop, Illustrator, InDesign, AutoCAD, WordPress), les compétences digitales et la cybersécurité, ainsi que des langages de programmation. Retrouvez le catalogue complet sur <a href="https://www.tosa.org/FR/index" target="_blank" rel="noopener">tosa.org</a>.
             </div>
           </details>
 
           <details class="faq-item">
-            <summary>Isograd Testing Services est-il compatible avec les outils RH ?</summary>
-            <div class="answer">
+            <summary data-i18n="faq.q4">Isograd Testing Services est-il compatible avec les outils RH ?</summary>
+            <div class="answer" data-i18n="faq.a4">
               Oui. Isograd Testing Services s'intègre à votre écosystème RH : ATS, LMS et SIRH, via API ou connecteurs dédiés. Les invitations, les résultats et les rapports circulent ainsi automatiquement entre vos outils, sans ressaisie, et dans le respect du RGPD.
             </div>
           </details>
@@ -637,46 +728,173 @@
     <div class="footer-main">
       <div class="footer-brand">
         <img src="assets/logo-isograd-white.png" alt="Isograd">
-        <p>L'expertise tech au service de l'évaluation de compétences depuis plus de 15 ans.</p>
+        <p data-i18n="footer.tagline">L'expertise tech au service de l'évaluation de compétences depuis plus de 15 ans.</p>
       </div>
       <div class="footer-links">
         <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
-        <h3>Accès rapides</h3>
+        <h3 data-i18n="footer.quick">Accès rapides</h3>
 
         <div class="footer-group">
-          <a href="https://www.tosa.org/FR/index" target="_blank" rel="noopener">www.tosa.org</a>
+          <a href="https://www.tosa.org/FR/index" data-href-en="https://www.tosa.org/EN/index" target="_blank" rel="noopener">www.tosa.org</a>
           <div class="socials">
-            <a href="https://www.linkedin.com/company/tosa-certifications/" target="_blank" rel="noopener" aria-label="Tosa sur LinkedIn">
+            <a href="https://www.linkedin.com/company/tosa-certifications/" target="_blank" rel="noopener" aria-label="Tosa – LinkedIn">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
             </a>
-            <a href="https://www.youtube.com/channel/UCvB0YX9gQqxEJ6JtRXRJZMQ/videos" target="_blank" rel="noopener" aria-label="Tosa sur YouTube">
+            <a href="https://www.youtube.com/channel/UCvB0YX9gQqxEJ6JtRXRJZMQ/videos" target="_blank" rel="noopener" aria-label="Tosa – YouTube">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
             </a>
-            <a href="https://webikeo.fr/chaine/isograd/webinars" target="_blank" rel="noopener" aria-label="Webinars Tosa sur Webikeo">W</a>
+            <a href="https://webikeo.fr/chaine/isograd/webinars" target="_blank" rel="noopener" aria-label="Tosa – Webikeo">W</a>
           </div>
         </div>
 
         <div class="footer-group">
-          <a href="https://www.isograd-testingservices.com/FR/index" target="_blank" rel="noopener">www.isograd-testingservices.com</a>
+          <a href="https://www.isograd-testingservices.com/FR/index" data-href-en="https://www.isograd-testingservices.com/EN/index" target="_blank" rel="noopener">www.isograd-testingservices.com</a>
           <div class="socials">
-            <a href="https://www.linkedin.com/company/isograd-testing-services" target="_blank" rel="noopener" aria-label="Isograd Testing Services sur LinkedIn">
+            <a href="https://www.linkedin.com/company/isograd-testing-services" target="_blank" rel="noopener" aria-label="Isograd Testing Services – LinkedIn">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
             </a>
-            <a href="https://www.youtube.com/@GroupeIsograd" target="_blank" rel="noopener" aria-label="Isograd Testing Services sur YouTube">
+            <a href="https://www.youtube.com/@GroupeIsograd" target="_blank" rel="noopener" aria-label="Isograd Testing Services – YouTube">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
             </a>
-            <a href="https://webikeo.fr/chaine/isograd/webinars#channel-nav" target="_blank" rel="noopener" aria-label="Webinars Isograd Testing Services sur Webikeo">W</a>
+            <a href="https://webikeo.fr/chaine/isograd/webinars#channel-nav" target="_blank" rel="noopener" aria-label="Isograd Testing Services – Webikeo">W</a>
           </div>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      © <span id="year"></span> Isograd SAS. Tous droits réservés. | 35 rue des Jeûneurs, 75002 Paris.
+      <span>© <span id="year"></span> <span data-i18n="footer.copy">Isograd SAS. Tous droits réservés.</span> | 35 rue des Jeûneurs, 75002 Paris.</span>
+      <div class="lang" role="group" aria-label="Langue / Language">
+        <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+        <span class="sep" aria-hidden="true">|</span>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
     </div>
   </footer>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    (function () {
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      /* ─── Traductions EN (le FR est le contenu HTML par défaut) ─── */
+      var EN = {
+        'meta.title': 'Isograd – Technology expertise powering skills assessment',
+        'meta.description': 'Isograd brings 15 years of technology expertise to skills assessment. Two complementary solutions: Tosa (skills certification) and Isograd Testing Services (assessment platform).',
+        'nav.about': 'About',
+        'nav.offers': 'Our solutions',
+        'nav.faq': 'FAQ',
+        'nav.contact': 'Contact',
+        'hero.title': 'Isograd, technology expertise powering skills assessment.',
+        'hero.sub': '15 years transforming assessment into a decision-making tool and a competitive advantage.',
+        'hero.btn': 'Explore our solutions',
+        'about.title': 'About',
+        'about.lead': 'Isograd brings 15 years of technology expertise to skills assessment.',
+        'about.body': 'With offices in France, the United States, and Canada, we design solutions that help organizations assess skills objectively, reliably, and securely.<br>Our technology adapts to every need and every assessment context.',
+        'about.strong': 'Two complementary areas of expertise carry our vision forward: Tosa and Isograd Testing Services (ITS).',
+        'about.btn': 'Contact us',
+        'quote.text': '“Skills don’t wait for curriculum to catch up. The students who thrive tomorrow are the ones we equip for change today.”',
+        'quote.name': 'Mathieu Lillo',
+        'quote.role': 'CEO North America at Isograd',
+        'offers.photoAlt': 'A candidate taking a test on her laptop',
+        'offers.title': 'Two solutions. One goal: measure what matters.',
+        'offers.sub': 'Isograd offers two complementary solutions with a single objective: measuring what truly matters.',
+        'tosa.tag': 'Skills Certification',
+        'tosa.desc': 'The globally recognized digital skills credential built for K-12 education.',
+        'tosa.sub': '',
+        'tosa.li1': 'Scored on a 1,000-point scale across 5 proficiency levels',
+        'tosa.li2': 'Adaptive exams with instant results',
+        'tosa.li3': 'Built-in anti-cheating and LMS integration',
+        'tosa.li4': '1,800+ authorized testing centers in 58 countries',
+        'tosa.li5': 'Trusted by educators and institutions worldwide',
+        'its.tag': 'Assessment Platform',
+        'its.desc': 'Purpose-built for HR teams who need full control over how they evaluate talent.',
+        'its.sub': 'No mandatory certification. No rigid frameworks. Just results.',
+        'its.li1': 'Build custom assessments — with or without AI assistance',
+        'its.li2': 'Connects to your ATS, LMS, and HRIS out of the box',
+        'its.li3': 'Remote proctoring included',
+        'its.li4': 'Reporting that’s actually easy to act on',
+        'its.li5': 'GDPR-compliant & available 24/7',
+        'card.btn': 'Visit the website',
+        'faq.title': 'FAQ',
+        'faq.sub': 'Frequently asked questions',
+        'faq.q1': 'What is Isograd?',
+        'faq.a1': 'Isograd is an EdTech company founded in Paris in 2010, with a growing presence in the US and Canada.<br>We build assessment and certification technology that organizations actually trust — because the data it produces is clean, secure, and built to inform real decisions.',
+        'faq.q2': 'What’s the difference between Tosa and ITS?',
+        'faq.a2': 'Tosa is for K-12 schools and training providers that want to give students a recognized credential that means something in the real world. ITS is for HR teams that need to run assessments internally — hiring screens, skills audits, onboarding benchmarks — without being locked into a certification framework. Simply put: Tosa certifies for the market. ITS assesses for your organization.',
+        'faq.q3': 'Which software skills does the Tosa certification cover?',
+        'faq.a3': 'Tosa covers the key software and digital skills used in the workplace: office productivity (Excel, Word, PowerPoint, Outlook, Google Sheets, Docs and Slides), creative tools (Photoshop, Illustrator, InDesign, AutoCAD, WordPress), digital literacy and cybersecurity, as well as programming languages. Browse the full catalog on <a href="https://www.tosa.org/EN/index" target="_blank" rel="noopener">tosa.org</a>.',
+        'faq.q4': 'Does ITS integrate with HR tools?',
+        'faq.a4': 'Yes. Isograd Testing Services connects to your HR ecosystem — ATS, LMS and HRIS — through APIs or dedicated connectors. Invitations, results and reports flow automatically between your tools, with no re-entry and in full compliance with GDPR.',
+        'footer.tagline': 'Assessment technology, trusted for over 15 years.',
+        'footer.quick': 'Quick links',
+        'footer.copy': 'Isograd SAS. All rights reserved.'
+      };
+
+      var AVATARS = {
+        fr: '<img src="assets/avatar-marc.png" alt="">',
+        en: 'ML'
+      };
+
+      /* Mémorise le FR d'origine pour pouvoir y revenir */
+      var FR = {};
+      var attrs = ['data-i18n', 'data-i18n-html', 'data-i18n-content', 'data-i18n-alt'];
+      attrs.forEach(function (attr) {
+        document.querySelectorAll('[' + attr + ']').forEach(function (el) {
+          var key = el.getAttribute(attr);
+          if (FR[key] !== undefined) return;
+          if (attr === 'data-i18n') FR[key] = el.textContent.trim();
+          else if (attr === 'data-i18n-html') FR[key] = el.innerHTML.trim();
+          else if (attr === 'data-i18n-content') FR[key] = el.getAttribute('content');
+          else if (attr === 'data-i18n-alt') FR[key] = el.getAttribute('alt');
+        });
+      });
+      document.querySelectorAll('[data-href-en]').forEach(function (a) {
+        a.setAttribute('data-href-fr', a.getAttribute('href'));
+      });
+
+      function apply(lang) {
+        var dict = lang === 'en' ? EN : FR;
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          var v = dict[el.getAttribute('data-i18n')];
+          if (v !== undefined) el.textContent = v;
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+          var v = dict[el.getAttribute('data-i18n-html')];
+          if (v !== undefined) el.innerHTML = v;
+        });
+        document.querySelectorAll('[data-i18n-content]').forEach(function (el) {
+          var v = dict[el.getAttribute('data-i18n-content')];
+          if (v !== undefined) el.setAttribute('content', v);
+        });
+        document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+          var v = dict[el.getAttribute('data-i18n-alt')];
+          if (v !== undefined) el.setAttribute('alt', v);
+        });
+        document.querySelectorAll('[data-href-en]').forEach(function (a) {
+          a.setAttribute('href', a.getAttribute(lang === 'en' ? 'data-href-en' : 'data-href-fr'));
+        });
+        document.getElementById('quote-avatar').innerHTML = AVATARS[lang];
+        document.querySelectorAll('.lang button').forEach(function (b) {
+          b.setAttribute('aria-pressed', b.getAttribute('data-lang') === lang ? 'true' : 'false');
+        });
+        document.documentElement.lang = lang;
+        document.body.setAttribute('data-lan_id', lang === 'en' ? '2' : '1');
+        try { sessionStorage.setItem('iso-lang', lang); } catch (e) {}
+      }
+
+      /* Langue initiale : ?lang= > session > navigateur */
+      var param = (new URLSearchParams(location.search).get('lang') || '').toLowerCase();
+      var stored = null;
+      try { stored = sessionStorage.getItem('iso-lang'); } catch (e) {}
+      var nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+      var active = (param === 'fr' || param === 'en') ? param
+                 : (stored === 'fr' || stored === 'en') ? stored
+                 : (nav.indexOf('fr') === 0 ? 'fr' : 'en');
+      apply(active);
+
+      document.querySelectorAll('.lang button').forEach(function (b) {
+        b.addEventListener('click', function () { apply(b.getAttribute('data-lang')); });
+      });
+    })();
   </script>
 </body>
 </html>
